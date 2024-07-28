@@ -4,7 +4,8 @@ export const Constants={
         Create_Department:'/Departments/CreateDepartment',
         Update_Department:'/Departments/UpdateDepartment',
         Delete_Department:'/Departments/DeleteDepartments',
-        PRODUCTS:'/products'
+        Products:'/products',
+        Login:'/Authentication/Login',
     },
     Validition_Message:{
         Required:'This is required'

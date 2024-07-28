@@ -17,3 +17,14 @@ export class Department {
     this.createdDate = new Date();
   }
 }
+
+
+export class LoginModel {
+  email: string;
+  password: string;
+  
+  constructor() {
+    this.password = '';
+    this.email = '';
+  }
+}
