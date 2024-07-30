@@ -1,53 +1,71 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit { 
-  constructor(private router:Router) {}
+export class LayoutComponent implements OnInit {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.initializeSidebarToggle();
   }
 
   initializeSidebarToggle(): void {
-    const sidebar = document.querySelector(".sidebar");
-    const closeBtn = document.querySelector("#btn");
-    const searchBtn = document.querySelector(".bx-search");
+    const sidebar = this.el.nativeElement.querySelector('.sidebar');
+    const closeBtn = this.el.nativeElement.querySelector('#btn');
+    const searchBtn = this.el.nativeElement.querySelector('.bx-search');
+    const links: NodeListOf<HTMLAnchorElement> = this.el.nativeElement.querySelectorAll('.nav-list a');
 
     if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
+      this.renderer.listen(closeBtn, 'click', () => {
         if (sidebar) {
-          sidebar.classList.toggle("open");
+          this.toggleClass(sidebar, 'open');
         }
-        this.menuBtnChange(); // calling the function(optional)
+        this.menuBtnChange();
       });
     }
 
     if (searchBtn) {
-      searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search icon
+      this.renderer.listen(searchBtn, 'click', () => {
         if (sidebar) {
-          sidebar.classList.toggle("open");
+          this.toggleClass(sidebar, 'open');
         }
-        this.menuBtnChange(); // calling the function(optional)
+        this.menuBtnChange();
       });
+    }
+
+    // Add console.log to test link clicks
+    links.forEach((link: HTMLAnchorElement) => {
+      this.renderer.listen(link, 'click', (event) => {
+        console.log('Link clicked:', link.href);
+      });
+    });
+  }
+
+  toggleClass(element: any, className: string): void {
+    if (element.classList.contains(className)) {
+      this.renderer.removeClass(element, className);
+    } else {
+      this.renderer.addClass(element, className);
     }
   }
 
   menuBtnChange(): void {
-    const sidebar = document.querySelector(".sidebar");
-    const closeBtn = document.querySelector("#btn");
+    const sidebar = this.el.nativeElement.querySelector('.sidebar');
+    const closeBtn = this.el.nativeElement.querySelector('#btn');
 
     if (sidebar && closeBtn) {
-      if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); // replacing the icons class
+      if (sidebar.classList.contains('open')) {
+        this.renderer.removeClass(closeBtn, 'bx-menu');
+        this.renderer.addClass(closeBtn, 'bx-menu-alt-right');
       } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); // replacing the icons class
+        this.renderer.removeClass(closeBtn, 'bx-menu-alt-right');
+        this.renderer.addClass(closeBtn, 'bx-menu');
       }
     }
   }

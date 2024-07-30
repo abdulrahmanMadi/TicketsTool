@@ -269,11 +269,59 @@
     color: #11101d;
     font-size: 25px;
     font-weight: 500;
-    margin: 18px
+    margin: 18px;
 }
 
 @media (max-width: 420px) {
     .sidebar li .tooltip {
         display: none;
     }
+}
+/* Prevent text selection within the buttons */
+.sidebar li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101D;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Additional styling for hover effect */
+.sidebar li a:hover {
+  background: #FFF;
+  color: #11101D;
+}
+
+/* Ensure text and icons are properly styled and aligned */
+.sidebar li a .links_name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.sidebar.open li a .links_name {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+
+/* Ensure icons are properly styled and aligned */
+.sidebar li i {
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
 }

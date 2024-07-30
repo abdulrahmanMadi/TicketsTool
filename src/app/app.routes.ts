@@ -8,38 +8,17 @@ import { TicketsComponent } from './Pages/tickets/tickets.component';
 import { NewTecketsComponent } from './Pages/new-teckets/new-teckets.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
     {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },{
         path: '',
         component: LayoutComponent,
         children: [
-            {
-                path: 'dashboard',
-                component: DashboardComponent
-            },
-            {
-                path: 'employee',
-                component: EmployeeComponent
-            },
-            {
-                path: 'department',
-                component: DepartmentComponent
-            },
-            {
-                path: 'tickets',
-                component: TicketsComponent
-            },
-            {
-                path: 'new-ticket',
-                component: NewTecketsComponent
-            }
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'employee', component: EmployeeComponent },
+            { path: 'department', component: DepartmentComponent },
+            { path: 'tickets', component: TicketsComponent },
+            { path: 'new-ticket', component: NewTecketsComponent }
         ]
     }
 ];
