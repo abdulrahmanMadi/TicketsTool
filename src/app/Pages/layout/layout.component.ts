@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import {  employeeModel } from '../../Core/Models/Employee-Model';
 
 @Component({
   selector: 'app-layout',
@@ -9,7 +10,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    const localData = localStorage.getItem('TicketData');
+    if (localData != null) {
+      this.LoggedInData = JSON.parse(localData);
+    }
+
+  }
 
   ngOnInit(): void {
     this.initializeSidebarToggle();
@@ -69,4 +76,18 @@ export class LayoutComponent implements OnInit {
       }
     }
   }
+
+
+
+  ///////////////////////////////
+
+
+  LoggedInData: employeeModel = new employeeModel();
+
+/**
+ *
+ */
+
+
+
 }

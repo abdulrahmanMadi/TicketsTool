@@ -1,12 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DepartmentService } from '../../Core/Services/department.service';
+import { API_Response } from '../../Core/Models/API_Response-model';
+import { DepartmentModel } from '../../Core/Models/Department-model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-department',
   standalone: true,
-  imports: [],
+  imports: [FormsModule,CommonModule],
   templateUrl: './department.component.html',
   styleUrl: './department.component.scss'
 })
-export class DepartmentComponent {
+export class DepartmentComponent implements OnInit {
+/**
+ *
+ */
+departmentList: DepartmentModel[] = [];
+constructor(private deptService: DepartmentService) {
+ 
+  
+}
+  ngOnInit(): void {
+    this.loadDepartments()
+   }
+
+  loadDepartments(): void {
+    this.deptService.GetAllDepartment().subscribe((res:API_Response) => {
+       this.departmentList = res.data;
+    });
+  }
 
 }
