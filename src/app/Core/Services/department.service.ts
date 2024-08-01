@@ -29,4 +29,6 @@ export class DepartmentService {
   DeleteDepartment(id:number):Observable<API_Response>{
     return this.http.delete<API_Response>(environment.API_Url + Constants.API_Endpoint.Delete_Department+id);
   }
+
+ 
 }

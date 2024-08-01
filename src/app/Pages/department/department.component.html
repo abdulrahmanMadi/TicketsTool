@@ -14,6 +14,8 @@
                                 <tr>
                                     <th>Sr No</th>
                                     <th>Department Name</th>
+                                    <th>Department Head Name</th>
+
                                     <th>Created Date</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -23,6 +25,8 @@
                                     <tr>
                                         <td>{{$index+1}}</td>
                                         <td>{{item.deptName | na}}</td>
+                                        <td>{{item.deptHeadName | na}}</td>
+
                                         <td>{{item.createdDate| date:'dd-MMM-yyyy' }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-primary">Edit</button>
@@ -46,9 +50,18 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="">Department Name</label>
-                        <input  type="text" class="form-control"/>
+                        <input [(ngModel)]="departmentObj.deptHeadName" type="text" class="form-control"/>
                     </div>
-                  
+                    <div class="col-12">
+                        <label for="">select Department  head</label>
+                       <select class="form-select" [(ngModel)]="departmentObj.deptHeadEmpId" >
+
+                        @for ( emp of employee$|async; track $index) {
+                            <option [value]="emp.employeeId">{{ emp.employeeName}}</option>
+                        }
+
+                       </select>
+                    </div>
                   
                 </div>
                 <div class="row pt-3">
@@ -56,7 +69,8 @@
                         <button class="btn btn-secondary">Reset</button>
                     </div>
                     <div class="col-6 text-center">
-                      
+                        <button class="btn btn-success" (click)="OnSave()">Save</button>
+
                        
                     </div>
                 </div>

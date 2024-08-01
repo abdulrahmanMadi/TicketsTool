@@ -6,6 +6,10 @@ export const Constants={
         Delete_Department:'/Departments/DeleteDepartments',
         Products:'/products',
         Login:'/Authentication/Login',
+
+        // For Employee
+        GetAllEmployees:'/Employees/GetEmployees',
+
     },
     Validition_Message:{
         Required:'This is required'
