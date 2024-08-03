@@ -3,7 +3,7 @@ export const Constants={
         Get_Department:'/Departments/GetDepartments',
         Create_Department:'/Departments/CreateDepartment',
         Update_Department:'/Departments/UpdateDepartment',
-        Delete_Department:'/Departments/DeleteDepartments',
+        Delete_Department:'/Departments/DeleteDepartment',
         Products:'/products',
         Login:'/Authentication/Login',
 

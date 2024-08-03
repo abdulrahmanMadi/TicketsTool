@@ -1,6 +1,6 @@
 export class DepartmentModel {
   deptId: number;
-  deptName: string;
+  departmentName: string;
   deptHeadName: string;
 
   deptHeadEmpId: number;
@@ -8,7 +8,7 @@ export class DepartmentModel {
   
   constructor() {
     this.deptId = 0;
-    this.deptName = '';
+    this.departmentName = '';
     this.deptHeadName = '';
     this.deptHeadEmpId = 0;
     this.createdDate = new Date();

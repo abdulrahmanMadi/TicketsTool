@@ -23,11 +23,11 @@ export class DepartmentService {
   }
 
   UpdateDepartment(obj:DepartmentModel):Observable<API_Response>{
-    return this.http.put<API_Response>(environment.API_Url + Constants.API_Endpoint.Update_Department,obj);
+    return this.http.put<API_Response>(`${environment.API_Url}${Constants.API_Endpoint.Update_Department}/${obj.deptId}`, obj);
   }
 
-  DeleteDepartment(id:number):Observable<API_Response>{
-    return this.http.delete<API_Response>(environment.API_Url + Constants.API_Endpoint.Delete_Department+id);
+  DeleteDepartment(id: number): Observable<API_Response> {
+    return this.http.delete<API_Response>(`${environment.API_Url}${Constants.API_Endpoint.Delete_Department}/${id}`);
   }
 
  

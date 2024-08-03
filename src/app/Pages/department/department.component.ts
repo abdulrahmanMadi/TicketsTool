@@ -58,4 +58,38 @@ OnSave(): void {
     }
   });
 }
+
+
+OnEdit(item:DepartmentModel): void {
+  this.departmentObj =item;
+}
+
+OnUpdate(){
+  this.deptService.UpdateDepartment(this.departmentObj).subscribe((res: API_Response) => {
+    if (res.result) {
+      alert('Department Updated successfully');
+      this.loadDepartments();
+      this.departmentObj = new DepartmentModel();
+    }else {
+      alert(res.message);
+    }
+  });
+}
+OnRest(){
+  this.departmentObj = new DepartmentModel();
+}
+
+OnDelete(id: number){
+  if(confirm('Are you sure you want to delete this department?')){
+    this.deptService.DeleteDepartment(id).subscribe((res: API_Response) => {
+      if (res.result) {
+        alert('Department deleted successfully');
+        this.loadDepartments();
+      }else {
+       
+        alert(res.message);
+      }
+    });
+  }
+}
 }
