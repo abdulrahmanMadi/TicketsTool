@@ -12,22 +12,32 @@ import { employeeModel } from '../Models/Employee-Model';
 })
 export class EmployeeService {
 
-  constructor(private http: HttpClient)  { }
+  constructor(private http: HttpClient) { }
 
-  Login(obj:LoginModel):Observable<API_Response>{
-    return this.http.post<API_Response>(environment.API_Url + Constants.API_Endpoint.Login,obj);
+  Login(obj: LoginModel): Observable<API_Response> {
+    return this.http.post<API_Response>(environment.API_Url + Constants.API_Endpoint.Login, obj);
   }
 
-  GetListEmployees():Observable<employeeModel[]>{
+  GetListEmployees(): Observable<employeeModel[]> {
     return this.http.get<employeeModel[]>(environment.API_Url + Constants.API_Endpoint.GetAllEmployees)
-    .pipe(map((res:any)=>{
-      return res.data;
-    }));
+      .pipe(map((res: any) => {
+        return res.data;
+      }));
   }
-  GetAllEmployees():Observable<API_Response>{
+
+  GetAllEmployees(): Observable<API_Response> {
     return this.http.get<API_Response>(environment.API_Url + Constants.API_Endpoint.GetAllEmployees);
   }
 
-  
+  CreateEmployee(obj: employeeModel): Observable<API_Response> {
+    return this.http.post<API_Response>(environment.API_Url + Constants.API_Endpoint.CreateEmployee, obj);
+  }
 
+  UpdateEmployee(obj: employeeModel): Observable<API_Response> {
+    return this.http.put<API_Response>(`${environment.API_Url}${Constants.API_Endpoint.UpdateEmployee}/${obj.employeeId}`, obj);
+  }
+
+  DeleteEmployee(id: number): Observable<API_Response> {
+    return this.http.delete<API_Response>(`${environment.API_Url}${Constants.API_Endpoint.DeleteEmployee}/${id}`);
+  }
 }

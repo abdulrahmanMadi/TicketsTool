@@ -2,8 +2,8 @@ export class employeeModel {
   employeeId: number;
   employeeName: string;
   contactNo: any;
-  emailId: string;
-  deptId: number;
+  email: string;
+  departmentId: number;
   password: string;
   gender: any;
   role: any;
@@ -12,8 +12,8 @@ export class employeeModel {
     this.employeeId = 0;
     this.employeeName = '';
     this.contactNo = '';
-    this.emailId = '';
-    this.deptId = 0;
+    this.email = '';
+    this.departmentId = 0;
     this.password = '';
     this.gender = '';
     this.role = '';

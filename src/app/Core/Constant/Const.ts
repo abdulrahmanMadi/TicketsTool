@@ -10,6 +10,9 @@ export const Constants={
         // For Employee
         GetAllEmployees:'/Employees/GetEmployees',
         GetEmployeesByDepartment:'/Employees/GetEmployeesByDepartment',
+        CreateEmployee: '/Employees/CreateEmployee',
+        UpdateEmployee: '/Employees/UpdateEmployee',
+        DeleteEmployee: '/Employees/DeleteEmployee'
 
     },
     Validition_Message:{

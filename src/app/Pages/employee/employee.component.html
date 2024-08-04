@@ -1,1 +1,104 @@
-<p>employee works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4" *ngFor="let employee of employeeList">
+      <mat-card class="mb-3 employee-card">
+        <mat-card-header>
+          <div mat-card-avatar class="employee-avatar"></div>
+          <mat-card-title class="text-center">{{ employee.employeeName }}</mat-card-title>
+          <mat-card-subtitle>{{ employee.role }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <mat-icon>email</mat-icon>
+            {{ employee.email }}
+          </p>
+          <p>
+            <mat-icon>phone</mat-icon>
+            {{ employee.contactNo }}
+          </p>
+          <p>
+            <mat-icon>business</mat-icon>
+            {{ getDepartmentName(employee.departmentId) }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="justify-content-center">
+          <button mat-icon-button color="primary" (click)="onEdit(employee)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDelete(employee.employeeId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 text-center mb-3">
+      <button mat-raised-button color="primary" (click)="onCreate()">
+        <mat-icon>add</mat-icon>
+        Create New Employee
+      </button>
+    </div>
+  </div>
+  <ng-template #employeeDialog>
+    <h2 mat-dialog-title class="text-center">{{ isEdit ? 'Edit Employee' : 'Create Employee' }}</h2>
+    <mat-dialog-content>
+      <form class="dialog-form">
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Employee Name</mat-label>
+            <input matInput [(ngModel)]="employeeObj.employeeName" name="employeeName">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="employeeObj.email" name="emailId">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Contact No</mat-label>
+            <input matInput [(ngModel)]="employeeObj.contactNo" name="contactNo">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="employeeObj.password" type="password" name="password">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="employeeObj.gender" name="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+              <mat-option value="Other">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Role</mat-label>
+            <input matInput [(ngModel)]="employeeObj.role" name="role">
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Department</mat-label>
+            <mat-select [(ngModel)]="employeeObj.departmentId" name="departmentId">
+              <mat-option *ngFor="let department of departmentList" [value]="department.deptId">
+                {{ department.departmentName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions class="justify-content-center">
+      <button mat-button (click)="onClose()">Close</button>
+      <button mat-button color="primary" (click)="isEdit ? onUpdate() : onSave()">{{ isEdit ? 'Update' : 'Save' }}</button>
+    </mat-dialog-actions>
+  </ng-template>
+</div>

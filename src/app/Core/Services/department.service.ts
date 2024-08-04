@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Constants } from '../Constant/Const';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { API_Response } from '../Models/API_Response-model';
 import { departmentModel } from '../Models/Department-model';
 
@@ -16,6 +16,12 @@ export class DepartmentService {
     return this.http.get<API_Response>(environment.API_Url + Constants.API_Endpoint.Get_Department);
   }
 
+  GetAllDepartmentList():Observable<departmentModel[]>{
+    return this.http.get<departmentModel[]>(environment.API_Url + Constants.API_Endpoint.GetAllEmployees)
+    .pipe(map((res:any)=>{
+      return res.data;
+    }));
+  }
   CreateDepartment(obj: departmentModel): Observable<API_Response> {
     return this.http.post<API_Response>(environment.API_Url + Constants.API_Endpoint.Create_Department, obj);
   }
