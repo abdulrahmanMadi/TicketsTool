@@ -28,4 +28,6 @@ export class EmployeeService {
     return this.http.get<API_Response>(environment.API_Url + Constants.API_Endpoint.GetAllEmployees);
   }
 
+  
+
 }

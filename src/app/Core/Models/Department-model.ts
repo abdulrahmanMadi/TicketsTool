@@ -1,18 +1,15 @@
-export class DepartmentModel {
+export class departmentModel {
   deptId: number;
   departmentName: string;
   deptHeadName: string;
-
-  deptHeadEmpId: number;
+  deptHeadEmpIds: number[]; // Array to hold multiple employee IDs
   createdDate: Date;
   
   constructor() {
     this.deptId = 0;
     this.departmentName = '';
     this.deptHeadName = '';
-    this.deptHeadEmpId = 0;
+    this.deptHeadEmpIds = [];
     this.createdDate = new Date();
   }
 }
-
-

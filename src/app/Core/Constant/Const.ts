@@ -9,6 +9,7 @@ export const Constants={
 
         // For Employee
         GetAllEmployees:'/Employees/GetEmployees',
+        GetEmployeesByDepartment:'/Employees/GetEmployeesByDepartment',
 
     },
     Validition_Message:{
