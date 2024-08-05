@@ -1,26 +1,33 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import {  employeeModel } from '../../Core/Models/Employee-Model';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { employeeModel } from '../../Core/Models/Employee-Model';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet,RouterLink],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+
+  constructor(private el: ElementRef, private renderer: Renderer2, private router: Router) {
     const localData = localStorage.getItem('TicketData');
     if (localData != null) {
       this.LoggedInData = JSON.parse(localData);
     }
-
   }
 
-  ngOnInit(): void {
-    this.initializeSidebarToggle();
+  ngOnInit(): void {}
+
+  Logout(): void {
+    localStorage.removeItem('TicketData');
+    this.router.navigateByUrl('/login');
   }
+
+
 
   initializeSidebarToggle(): void {
     const sidebar = this.el.nativeElement.querySelector('.sidebar');
@@ -79,14 +86,9 @@ export class LayoutComponent implements OnInit {
 
 
 
-  ///////////////////////////////
-
 
   LoggedInData: employeeModel = new employeeModel();
 
-/**
- *
- */
 
 
 

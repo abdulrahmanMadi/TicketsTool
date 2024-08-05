@@ -6,6 +6,7 @@ import { EmployeeComponent } from './Pages/employee/employee.component';
 import { DepartmentComponent } from './Pages/department/department.component';
 import { TicketsComponent } from './Pages/tickets/tickets.component';
 import { NewTecketsComponent } from './Pages/new-teckets/new-teckets.component';
+import { authGuard } from './Core/Guard/Core/Guard/auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ export const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [authGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'employee', component: EmployeeComponent },
